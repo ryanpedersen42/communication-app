@@ -3,10 +3,7 @@ import './App.css';
 import 'tachyons';
 import Register from '../Components/Register/Register';
 import SignIn from '../Components/SignIn/SignIn';
-import Header from '../Components/Header/Header';
-// import CardList from '../Components/Cards/CardList';
-import Card from '../Components/Cards/Card.js';
-// import './ExampleText';
+import Header from '../Components/Header/Header';import Card from '../Components/Cards/Card.js';
 
 const initialState = {
   input: '',
@@ -20,7 +17,6 @@ const initialState = {
     joined: '',
   }
 }
-
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +32,6 @@ class App extends Component {
     }
     this.setState({route: route});
   }
-
 
   render() {
     const { route } = this.state;
