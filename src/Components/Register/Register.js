@@ -81,10 +81,30 @@ class Register extends React.Component {
     event.preventDefault()
   }
 
+  onSubmitSignIn = () => {
+    fetch('localhost:3000/register/', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
+      })
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user) {
+          this.props.loadUser(user)
+          this.props.onRouteChange('home');
+        }
+      })
+  }
+
+
   render() {
     return(
       <article className='br2 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center'>
-      <form className="pa4 black-80">
+      <form method='POST' action='/register' className="pa4 black-80">
         <div className="measure">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <legend className="f1 fw6 ph0 mh0">Register</legend>
@@ -135,10 +155,12 @@ class Register extends React.Component {
           </fieldset>
           <div className="justify-center">
             <button 
-              disabled={!this.state.canSubmit}              
+              disabled={!this.state.canSubmit}       
+              onClick={this.onSubmitSignIn}       
               className="b tac pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
               type="submit" 
               value="Register" 
+              onClick={this.onSubmitSignIn}
               >Register</button>
           </div>
         </div>
