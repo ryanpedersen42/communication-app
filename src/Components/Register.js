@@ -1,7 +1,7 @@
+//keeping local state in React and not Redux for this UI-specific page
+import React, { Component } from 'react';
 
-import React from 'react';
-
-class Register extends React.Component {
+class Register extends Component {
   constructor() {
     super()
     this.state = {
@@ -99,7 +99,7 @@ class Register extends React.Component {
         }
       })
   }
-
+  //TO DO: SET USER IN STATE
 
   render() {
     return(

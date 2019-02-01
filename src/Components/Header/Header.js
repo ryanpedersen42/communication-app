@@ -1,20 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Header.css';
 import logo from './logo.png';
+import { connect } from 'react-redux'
 
-const Header = () => {
+class Header extends Component {
+  render() {
   return (
     <div>
     <nav className="dt w-100 border-box pa4 ph5-ns bg-black">
     <img src={logo} alt='logo' style={{ height: 50, width: 150 }} />
     <div className="dtc v-mid w-75 tr helvetica">
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="#About" title="About">About</a>
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="#Blog" title="Store">Blog</a>
-      <a className="link dim dark-gray f6 f5-ns dib white grow"  href="#Get Info" title="Contact">Get Info</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/editor" title="Editor">Write a post</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/about" title="About">About</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns white grow" href="/getinfo" title="Contact">Get Info</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/signin" title="About">Sign In</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/register" title="About">Register</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/signout" title="About">Sign Out</a>
     </div>
   </nav>
   </div>
   )
 }
+}
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    username: state.authUser.user.username,
+    isSignedIn: state.authUser.isSignedIn
+  }
+}
+
+export default connect(mapStateToProps)(Header); 
+
+// const mapStateToProps = state => {
+//   return {
+//       user: state.isAuth.user,
+//       isAuth: state.authUser.isAuth
+//   }    
+// }
+// const mapDispatchToProps = dispatch => {
+//   return {
+//       openSignInWith: ()=> { dispatch({type: 'TOGGLE_MODAL', modalMode: true}) }
+//   }
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(Header);

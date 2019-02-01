@@ -1,34 +1,6 @@
 
 import React from 'react';
-class Register extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      email: '',
-      name: '',
-      password: '',
-      canSubmit: false,
-      formErrors: {
-        email: '',
-        username:'', 
-        password: '', 
-        confirmPassword: '',
-        },
-      formValidity: {
-        email: false,
-        username: false, 
-        password: false, 
-      }
-    };
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(event) {
-    const { name, value } = event.target
-    this.setState({
-      [name]: value
-    }, function(){ this.validateField(name, value)})
-  }
+class SignIn extends React.Component {
 
   render() {
     return(
@@ -72,4 +44,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default SignIn;

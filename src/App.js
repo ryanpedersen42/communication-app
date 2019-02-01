@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'tachyons';
-import Register from '../Components/Register/Register';
-import SignIn from '../Components/SignIn/SignIn';
-import Header from '../Components/Header/Header';import Card from '../Components/Cards/Card.js';
+import Register from './Components/Register';
+import SignIn from './Components/SignIn';
+import Header from './Components/Header/Header';import Card from './Components/Cards/Card.js';
 
 const initialState = {
   input: '',

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Card.css';
 
-
 //https://codesandbox.io/s/400lp1yjjw?from-embed this might help with opening box and close button
-const Card = () => {
+class Card extends Component {
+  render() {
   return( 
   <div className='pa4'>
     <section class="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
@@ -25,5 +25,5 @@ const Card = () => {
   </div>
   );
 }
-
+}
 export default Card;
