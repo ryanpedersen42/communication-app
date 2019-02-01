@@ -1,6 +1,38 @@
 
 import React from 'react';
 class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signInEmail: '',
+      signInPassword: '',
+    }
+  }
+  onEmailChange = (event) => {
+    this.setState({signInEmail: event.target.value})
+  }
+  onPasswordChange = (event) => {
+    this.setState({signInPassword: event.target.value})
+  }
+  onSubmitSignin = () => {
+    fetch('http://localhost:3000//signin/', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword,
+      })
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user.id) {
+          this.props.loadUser(user);
+          this.props.onRouteChange('home');
+        } else {
+          alert(`this un / pw combo doesn't exist`)
+        } 
+    })
+  }
 
   render() {
     return(
@@ -31,9 +63,9 @@ class SignIn extends React.Component {
             </div>          </fieldset>
           <div className="justify-center">
             <button 
-              disabled={!this.state.canSubmit}              
               className="b tac pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
               type="submit" 
+              onclick={this.onSubmitSignIn}
               value="Register" 
               >Sign In</button>
           </div>
