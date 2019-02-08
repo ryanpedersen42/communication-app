@@ -14,10 +14,11 @@ class App extends Component {
       
   render() {
     const { isSignedIn } = this.props;
+
     return (
       <div>
         <Header />
-        { isSignedIn === 'true' ? <Card /> : <Register/> }
+        { isSignedIn === true ? <Card /> : <Register/> }
       </div>
     );
   }
@@ -25,7 +26,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isSignedIn: state.user.signedIn
+    user: state.user,
+    isSignedIn: state.user.isSignedIn
   }
 }
 

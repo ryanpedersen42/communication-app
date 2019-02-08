@@ -1,16 +1,20 @@
 import {
   UPDATE_USER,
-  REGISTER_PENDING
+  REGISTER_PENDING,
+  SIGN_IN
 } from '../Constants/Constants'
-
-export default function userReducer(state='', action={}) {
+const initialState = {
+  isSignedIn: false,
+  user: ''
+}
+export default function userReducer(state=initialState, action) {
     switch (action.type) {
-      case REGISTER_PENDING:
-        return Object.assign({}, state, { isPending: true });
+      // case REGISTER_PENDING:
+      //   return Object.assign({}, state, { isPending: true });
       case UPDATE_USER:
-          return action.payload.user;
-      // case REGISTER_FAILURE:
-      //   return Object.assign({}, state, { error: action.payload, isPending: false });
+        return Object.assign({}, state, { user: action.payload.user });
+      case SIGN_IN: 
+        return Object.assign({}, state, {isSignedIn: true});
       default:
         return state;
     }

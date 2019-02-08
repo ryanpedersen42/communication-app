@@ -1,6 +1,7 @@
 import {
   UPDATE_USER,
-  SHOW_ERROR
+  SHOW_ERROR, 
+  SIGN_IN
 } from '../Constants/Constants'
 
 export function updateUser(newUser) {
@@ -8,6 +9,15 @@ export function updateUser(newUser) {
     type: UPDATE_USER,
     payload: {
       user: newUser
+    }
+  }
+}
+
+export function signIn(authStatus) {
+  return {
+    type: SIGN_IN,
+    payload: {
+      status: authStatus
     }
   }
 }

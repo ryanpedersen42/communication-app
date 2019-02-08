@@ -18,12 +18,14 @@ const allStoreEnhancers = compose(
   window.devToolsExtension && window.devToolsExtension()
 );
 
+const initialState = {
+  isSignedIn: false,
+  user: '',
+}
+
 const store = createStore(
-  rootReducer, 
-  {
-    isSignedIn: false,
-    user: '',
-  }, allStoreEnhancers
+  rootReducer, initialState,
+  allStoreEnhancers
 );
 
 ReactDOM.render(<Provider store={store}><App /> </Provider>, document.getElementById('root'));
