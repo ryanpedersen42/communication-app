@@ -1,53 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'tachyons';
+import { connect } from 'react-redux'
 import Register from './Components/Register';
-import SignIn from './Components/SignIn';
-import Header from './Components/Header/Header';import Card from './Components/Cards/Card.js';
-
-const initialState = {
-  input: '',
-  route: 'register',
-  isSignedIn: false,
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    entries: 0,
-    joined: '',
-  }
-}
+// import SignIn from './Components/SignIn';
+import Header from './Components/Header/Header';
+import Card from './Components/Cards/Card.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = initialState;
-      }
-
-  onRouteChange = (route) => {
-    if (route === 'signout') {
-      this.setState(initialState)
-    } else if (route === 'home') {
-      this.setState({isSignedIn: true})
-    }
-    this.setState({route: route});
   }
-
+      
   render() {
-    const { route } = this.state;
+    const { isSignedIn } = this.props;
     return (
       <div>
         <Header />
-        { route === 'home' 
-          ? <Card />
-          : ( route === 'signin'
-          ? <SignIn /> 
-          : <Register/> 
-          )
-        }
+        { isSignedIn === 'true' ? <Card /> : <Register/> }
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isSignedIn: state.user.signedIn
+  }
+}
+
+export default connect(mapStateToProps)(App);
