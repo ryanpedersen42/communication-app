@@ -25,22 +25,9 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    // username: state.authUser.user.username,
-    // isSignedIn: state.authUser.isSignedIn
+    user: state.user,
+    isSignedIn: state.user.isSignedIn
   }
 }
 
 export default connect(mapStateToProps)(Header); 
-
-// const mapStateToProps = state => {
-//   return {
-//       user: state.isAuth.user,
-//       isAuth: state.authUser.isAuth
-//   }    
-// }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       openSignInWith: ()=> { dispatch({type: 'TOGGLE_MODAL', modalMode: true}) }
-//   }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Header);
