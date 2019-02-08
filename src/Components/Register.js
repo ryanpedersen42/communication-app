@@ -7,29 +7,72 @@ class Register extends Component {
   constructor(props) {
     super(props);      
     this.state = {
-        username: '',
         email: '',
+        username: '',
         password: '',
-      }
-
-      this.onUpdateUser = this.onUpdateUser.bind(this);
+        confirmPassword: '',
+        canSubmit: false,
+        formErrors: {
+          email: '',
+          username:'', 
+          password: '', 
+          confirmPassword: '',
+          },
+        formValidity: {
+          email: false,
+          username: false, 
+          password: false, 
+          confirmPassword: false,
+        }
+      };
+      this.handleChange = this.handleChange.bind(this)
     }
+
+    handleChange(event) {
+      const { name, value } = event.target
+      this.setState({
+        [name]: value
+      }, function(){ this.validateField(name, value)})
+    }
+  
+    validateField(name, value) {
+      if(Object.keys(this.state.formValidity).includes(name)){
+        const fieldValidationErrors = this.state.formErrors
+        const validity = this.state.formValidity
+        const isEmail = name === "email"
+        const isPassword = name === "password"
+        const isPasswordConfirmation = name === "confirmPassword"
+        const label = name === "confirmPassword"? 'password confirmation' : name
+        const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
     
-      onNameChange = (event) => {
-        this.setState({username: event.target.value})
+        validity[name] = value.length >0
+        fieldValidationErrors[name] = validity[name] ? '': `${label} is required and cannot be empty`
+    
+        if(validity[name]) {
+          if(isPassword){
+            validity[name] = value.length >= 5;
+            fieldValidationErrors[name] = validity[name] ? '': `${label} should be 5 characters or more`
+          }
+          if(isEmail){
+            validity[name] = emailTest.test(value);
+            fieldValidationErrors[name] = validity[name] ? '' : `${label} should be a valid email address`
+          }
+          if(isPasswordConfirmation){
+            validity[name] = value === this.state.password
+            fieldValidationErrors[name] = validity[name] ? '' : `${label} should match password`
+          }
+        }
+      
+        this.setState({
+          formErrors: fieldValidationErrors,
+          formValidity: validity,
+        }, () => this.canSubmit())
       }
-
-      onEmailChange = (event) => {
-        this.setState({email: event.target.value})
-      }
-
-      onPasswordChange = (event) => {
-        this.setState({password: event.target.value})
-      }
-
-      onUpdateUser(event) {
-        this.props.onUpdateUser(this.state.username);
-      }
+    }
+    canSubmit() {
+      this.setState({ canSubmit: this.state.formValidity.email && this.state.formValidity.username && this.state.formValidity.password && this.state.formValidity.confirmPassword })
+    }
+  
 
       onSubmitSignIn = () => {
         fetch('http://localhost:3000/register', {
@@ -62,11 +105,13 @@ class Register extends Component {
                 <input
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="text"
-                  name="name"
+                  name="username"
                   id="name"
-                  onChange={this.onNameChange}
+                  value={this.state.username}
+                  onChange={this.handleChange}
                 />
               </div>
+              <div className="invalid-feedback">{this.state.formErrors.username}</div>
               <div className="mt3">
               <label className="db fw6 lh-copy f6" htmlFor="name">Email</label>
                 <input
@@ -74,9 +119,11 @@ class Register extends Component {
                   type="email"
                   name="email"
                   id="email"
-                  onChange={this.onEmailChange}
+                  value={this.state.email}
+                  onChange={this.handleChange}
                 />
               </div>
+              <div className="invalid-feedback">{this.state.formErrors.email}</div>
               <div className="mt3">
               <label className="db fw6 lh-copy f6" htmlFor="name">Password</label>
                 <input
@@ -84,12 +131,27 @@ class Register extends Component {
                   type="password"
                   name="password"
                   id="password"
-                  onChange={this.onPasswordChange}
+                  value={this.state.password}
+                  onChange={this.handleChange}
                 />
               </div>
+              <div className="invalid-feedback">{this.state.formErrors.password}</div>
+              <div className="mt3">
+              <label className="db fw6 lh-copy f6" htmlFor="name">Confirm Password</label>
+                <input
+                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  value={this.state.confirmPassword}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="invalid-feedback">{this.state.formErrors.confirmPassword}</div>
             </fieldset>
             <div className="">
               <button
+                disabled={!this.state.canSubmit}       
                 onClick={this.onSubmitSignIn}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"

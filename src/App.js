@@ -6,6 +6,8 @@ import Register from './Components/Register';
 // import SignIn from './Components/SignIn';
 import Header from './Components/Header/Header';
 import Card from './Components/Cards/Card.js';
+import LogInHeader from './Components/Header/LogInHeader';
+
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class App extends Component {
 
     return (
       <div>
-        <Header />
+      { isSignedIn === true ? <Header />: <LogInHeader/> }
         { isSignedIn === true ? <Card /> : <Register/> }
       </div>
     );
