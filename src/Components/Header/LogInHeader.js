@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import logo from './logo.png';
+import { NavLink } from "react-router-dom";
 
 class LogInHeader extends Component {
   render() {
@@ -9,10 +10,10 @@ class LogInHeader extends Component {
     <nav className="dt w-100 border-box pa4 ph5-ns bg-black">
     <img src={logo} alt='logo' style={{ height: 50, width: 150 }} />
     <div className="dtc v-mid w-75 tr helvetica">
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/about" title="About">About</a>
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns white grow" href="/getinfo" title="Contact">Contact</a>
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/signin" title="SignIn">Sign In</a>
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/register" title="Register">Register</a>
+      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/about" title="About">About</NavLink>
+      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns white grow" to="/getinfo" title="Contact">Contact</NavLink>
+      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/signin" title="SignIn">Sign In</NavLink>
+      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/register" title="Register">Register</NavLink>
     </div>
   </nav>
   </div>
