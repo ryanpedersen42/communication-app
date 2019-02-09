@@ -86,7 +86,7 @@ class Register extends Component {
         })
           .then(response => response.json())
           .then(user => {
-            if (user) {
+            if (user.id) {
               this.props.onUpdateUser(user.username);
               this.props.onSignIn();
             }
@@ -174,7 +174,6 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = {
   onUpdateUser: updateUser,
   onSignIn: signIn
-  // onApiRequest: apiRequest
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Register);

@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import userReducer from './Redux/Reducers/userReducer'
 import thunk from 'redux-thunk';
+import { Route, NavLink, BrowserRouter, Switch } from "react-router-dom";
 
 const rootReducer = combineReducers({ 
   user: userReducer,
@@ -19,7 +20,7 @@ const allStoreEnhancers = compose(
 );
 
 const initialState = {
-  isSignedIn: false,
+  isSignedIn: true,
   user: '',
 }
 
@@ -28,7 +29,15 @@ const store = createStore(
   allStoreEnhancers
 );
 
-ReactDOM.render(<Provider store={store}><App /> </Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <App />       
+      </Switch>
+    </BrowserRouter>
+  </Provider>, 
+  document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,24 +1,22 @@
-import React from 'react';
-import Card from './Card';
-import SomeText from './ExampleText'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
-const ContainerList = ({ ExampleText }) => {
-  return (
-    <div>
-    {
-      ExampleText.map((key) => {
-        return (
-          <Card 
-          key={key}
-          title={SomeText[key].title}
-          username={SomeText[key].username}
-          text={SomeText[key].text}
-          />
-        )
-      })
-    }
-    </div>
-  )
+class CardList extends Component {
+  render() {
+    const { username } = this.props;
+    return (
+      <div>
+        {username}
+      </div>
+    )
+  }
 }
 
-export default ContainerList;
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    username: state.user.username,
+  }
+}
+
+export default connect(mapStateToProps)(CardList);

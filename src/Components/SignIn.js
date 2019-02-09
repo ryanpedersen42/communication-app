@@ -1,5 +1,7 @@
-
 import React from 'react';
+import { connect } from 'react-redux'
+import { updateUser, signIn } from '../Redux/Actions/userActions';
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -26,8 +28,8 @@ class SignIn extends React.Component {
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange('home');
+          this.props.onUpdateUser(user.username);
+          this.props.onSignIn();
         } else {
           alert(`this un / pw combo doesn't exist`)
         } 
@@ -76,4 +78,16 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    isSignedIn: state.user.isSignedIn
+  }
+}
+
+const mapActionsToProps = {
+  onUpdateUser: updateUser,
+  onSignIn: signIn
+};
+
+export default connect (mapStateToProps, mapActionsToProps)(SignIn);

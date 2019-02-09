@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 
 
 class Editor extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       title: '',
       text: '',
@@ -34,33 +34,15 @@ class Editor extends Component {
         })
       }).catch((err)=>{console.log(err); this.setState({loading: false})})
   }
-
-  //   const url = fetch()
-  //   fetch('http://localhost:3000/editor', {
-  //     method: 'post',
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: JSON.stringify({
-  //       username: this.state.username,
-  //       title: this.state.title,
-  //       text: this.state.text,
-  //     })
-  //   })
-  //     .then(response => response.json())
-  //     .then(user => {
-  //       if (user) {
-  //         this.props.loadUser(user)
-  //         this.props.onRouteChange('home');
-  //       }
-  //   })
-  // }
   
   render() {
+    const { username } = this.props;
     return(
       <div>
       <section class="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
       <a class="f6 link dim ph3 pv2 dib right mb2 white bg-black absolute top-1 right-1" href="#0">X</a>
       <input id="title" class="input-reset ba b--black-20 pa2 mb2 db w-100" value={this.state.title} placeholder='title' type="text" aria-describedby="name-desc" />
-      {/* username populates here */}
+      {username}
       <input id="text" value={this.state.text} class="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
       <form class="pa4 black-80">
         <div class="measure flex">
@@ -73,9 +55,10 @@ class Editor extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.authUser.user
+  user: state.user,
+  username: state.user.username,
   }
 }
 

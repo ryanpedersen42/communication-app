@@ -11,8 +11,8 @@ class LogInHeader extends Component {
     <div className="dtc v-mid w-75 tr helvetica">
       <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/about" title="About">About</a>
       <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns white grow" href="/getinfo" title="Contact">Contact</a>
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/signin" title="About">Sign In</a>
-      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/register" title="About">Register</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/signin" title="SignIn">Sign In</a>
+      <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" href="/register" title="Register">Register</a>
     </div>
   </nav>
   </div>
