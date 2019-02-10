@@ -1,6 +1,5 @@
 import {
   UPDATE_USER,
-  REGISTER_PENDING,
   SIGN_IN
 } from '../Constants/Constants'
 const initialState = {

@@ -1,28 +1,33 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { updateUser, signIn } from '../Redux/Actions/userActions';
 
-class SignIn extends React.Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInEmail: '',
-      signInPassword: '',
+      email: '',
+      password: '',
     }
-  }
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
+  };
+
   onEmailChange = (event) => {
-    this.setState({signInEmail: event.target.value})
+    this.setState({email: event.target.value})
+    console.log(this.state.email)
   }
   onPasswordChange = (event) => {
-    this.setState({signInPassword: event.target.value})
+    this.setState({password: event.target.value})
   }
-  onSubmitSignin = () => {
-    fetch('http://localhost:3000//signin/', {
+
+  onSubmitSignIn = () => {
+    fetch('http://localhost:3000/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword,
+        email: this.state.email,
+        password: this.state.password,
       })
     })
       .then(response => response.json())
@@ -30,8 +35,6 @@ class SignIn extends React.Component {
         if (user.id) {
           this.props.onUpdateUser(user.username);
           this.props.onSignIn();
-        } else {
-          alert(`this un / pw combo doesn't exist`)
         } 
     })
   }
@@ -39,7 +42,7 @@ class SignIn extends React.Component {
   render() {
     return(
       <article className='br2 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center'>
-      <form className="pa4 black-80">
+      <main className="pa4 black-80">
         <div className="measure">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <legend className="f1 fw6 ph0 mh0">Sign In</legend>
@@ -47,10 +50,9 @@ class SignIn extends React.Component {
               <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
               <input className={`pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100`} 
               type="email" 
-              name="email"  
+              name="email-address"  
               id="email-address" 
-              value={this.state.email}
-              onChange={this.handleChange}
+              onChange={this.onEmailChange}
               />
             </div>
             <div className="mv3">
@@ -59,20 +61,20 @@ class SignIn extends React.Component {
               type="password" 
               name="password"  
               id="password" 
-              value={this.state.password}
-              onChange={this.handleChange}
+              onChange={this.onPasswordChange}
               />
-            </div>          </fieldset>
-          <div className="justify-center">
+            </div>          
+            </fieldset>
+          <div className="">
             <button 
               className="b tac pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
               type="submit" 
-              onclick={this.onSubmitSignIn}
-              value="Register" 
+              onClick={this.onSubmitSignIn}
+              value="SignIn" 
               >Sign In</button>
           </div>
         </div>
-    </form>
+    </main>
     </article>
     )
   }

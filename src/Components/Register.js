@@ -1,6 +1,6 @@
 //keeping local state in React and not Redux for this UI-specific page
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { updateUser, signIn } from '../Redux/Actions/userActions';
 
 class Register extends Component {

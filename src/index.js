@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import userReducer from './Redux/Reducers/userReducer'
 import thunk from 'redux-thunk';
-import { Route, NavLink, BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 
 const rootReducer = combineReducers({ 
   user: userReducer,

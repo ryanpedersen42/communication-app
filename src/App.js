@@ -31,7 +31,7 @@ class App extends Component {
           <Route path="/editor" component={Editor} />
         </Switch>
       )
-        : <Register/> }
+        : <SignIn/> }
       </div>
     );
   }

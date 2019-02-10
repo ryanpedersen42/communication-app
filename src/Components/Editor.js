@@ -12,6 +12,14 @@ class Editor extends Component {
     }
   }
 
+  onTitleChange = (event) => {
+    this.setState({ title: event.target.value });
+  }
+
+  onTextChange = (event) => {
+    this.setState({ text: event.target.value });
+  }
+
   submitPost() {
     this.setState({
       loading: true
@@ -39,9 +47,9 @@ class Editor extends Component {
       <div>
       <section class="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
       <a class="f6 link dim ph3 pv2 dib right mb2 white bg-black absolute top-1 right-1" href="#0">X</a>
-      <input id="title" class="input-reset ba b--black-20 pa2 mb2 db w-100" value={this.state.title} placeholder='title' type="text" aria-describedby="name-desc" />
+      <input id="title" class="input-reset ba b--black-20 pa2 mb2 db w-100" onChange={this.onTitleChange} placeholder='title' type="text" aria-describedby="name-desc" />
       {user} here
-      <input id="text" value={this.state.text} class="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
+      <input id="text" onChange={this.onTextChange} class="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
       <form class="pa4 black-80">
         <div class="measure flex">
           <a class="f6 link dim ph3 pv2 dib right mb2 white bg-black" href="#0">Submit</a>    
