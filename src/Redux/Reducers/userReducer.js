@@ -4,7 +4,7 @@ import {
   SIGN_IN
 } from '../Constants/Constants'
 const initialState = {
-  isSignedIn: true,
+  isSignedIn: false,
   user: ''
 }
 export default function userReducer(state=initialState, action) {

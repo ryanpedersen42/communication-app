@@ -20,7 +20,7 @@ const allStoreEnhancers = compose(
 );
 
 const initialState = {
-  isSignedIn: true,
+  isSignedIn: false,
   user: '',
 }
 

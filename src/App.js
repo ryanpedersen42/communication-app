@@ -31,7 +31,7 @@ class App extends Component {
           <Route path="/editor" component={Editor} />
         </Switch>
       )
-        : <SignIn/> }
+        : <Register/> }
       </div>
     );
   }
@@ -40,7 +40,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    isSignedIn: state.isSignedIn
+    isSignedIn: state.user.isSignedIn
   }
 }
 
