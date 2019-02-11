@@ -7,9 +7,11 @@ class Editor extends Component {
     this.state = {
       title: '',
       text: '',
-      days: '',
+      username: this.props.user,
       loading: false
     }
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
   }
 
   onTitleChange = (event) => {
@@ -20,24 +22,21 @@ class Editor extends Component {
     this.setState({ text: event.target.value });
   }
 
-  submitPost() {
-    this.setState({
-      loading: true
-    })
+  submitPost =() => {
     fetch('http://localhost:3000/api/posts', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        username: this.props.user,
+        username: this.state.username,
         title: this.state.title,
         text: this.state.text, 
-        upvotes: 0,
       })
     })
-      .then((res) => {
-        this.setState({
-          loading: false
-        })
+      .then((response) => response.json())
+      .then(response => {
+        if (response) {
+          console.log(response)
+        }
       }).catch((err)=>{console.log(err); this.setState({loading: false})})
   }
   
@@ -45,14 +44,14 @@ class Editor extends Component {
     const { user } = this.props;
     return(
       <div>
-      <section class="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
-      <a class="f6 link dim ph3 pv2 dib right mb2 white bg-black absolute top-1 right-1" href="#0">X</a>
+      <section className="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
+      <a className="f6 link dim ph3 pv2 dib right mb2 white bg-black absolute top-1 right-1" href="#0">X</a>
       <input id="title" class="input-reset ba b--black-20 pa2 mb2 db w-100" onChange={this.onTitleChange} placeholder='title' type="text" aria-describedby="name-desc" />
       {user} here
-      <input id="text" onChange={this.onTextChange} class="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
-      <form class="pa4 black-80">
-        <div class="measure flex">
-          <a class="f6 link dim ph3 pv2 dib right mb2 white bg-black" href="#0">Submit</a>    
+      <input id="text" onChange={this.onTextChange} className="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
+      <form className="pa4 black-80">
+        <div className="measure flex">
+          <button onClick={this.submitPost} className="f6 link dim ph3 pv2 dib right mb2 white bg-black" type="submit">Submit</button>    
         </div>
       </form>  
     </section>
