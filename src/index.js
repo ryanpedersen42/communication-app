@@ -25,7 +25,7 @@ const initialState = {
 }
 
 const store = createStore(
-  rootReducer, initialState,
+  rootReducer,
   allStoreEnhancers
 );
 

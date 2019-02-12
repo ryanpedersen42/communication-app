@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router';
 
 class Editor extends Component {
   constructor(props) {
@@ -7,8 +8,8 @@ class Editor extends Component {
     this.state = {
       title: '',
       text: '',
-      username: this.props.user,
-      loading: false
+      username: this.props.user.user,
+      postCompleted: false,
     }
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
@@ -22,7 +23,7 @@ class Editor extends Component {
     this.setState({ text: event.target.value });
   }
 
-  submitPost =() => {
+  submitPost = () => {
     fetch('http://localhost:3000/api/posts', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -34,20 +35,24 @@ class Editor extends Component {
     })
       .then((response) => response.json())
       .then(response => {
-        if (response) {
-          console.log(response)
-        }
-      }).catch((err)=>{console.log(err); this.setState({loading: false})})
-  }
+          console.log("heres the resp", response)
+        }).catch((err)=>{
+          console.log(err)
+        })
+      this.setState({ postCompleted: true })
+      }
+      //add a setstate up there ^^^^
   
   render() {
-    const { user } = this.props;
+    if (this.state.postCompleted) {
+      return (
+        <Redirect to="/" />
+      )
+    } 
     return(
       <div>
       <section className="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
-      <a className="f6 link dim ph3 pv2 dib right mb2 white bg-black absolute top-1 right-1" href="#0">X</a>
-      <input id="title" class="input-reset ba b--black-20 pa2 mb2 db w-100" onChange={this.onTitleChange} placeholder='title' type="text" aria-describedby="name-desc" />
-      {user} here
+      <input id="title" className="input-reset ba b--black-20 pa2 mb2 db w-100" onChange={this.onTitleChange} placeholder='title' type="text" aria-describedby="name-desc" />
       <input id="text" onChange={this.onTextChange} className="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
       <form className="pa4 black-80">
         <div className="measure flex">
@@ -62,7 +67,7 @@ class Editor extends Component {
 
 const mapStateToProps = (state) => {
   return {
-  user: state.user.user,
+  user: state.user,
   }
 }
 

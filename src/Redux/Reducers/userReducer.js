@@ -9,7 +9,12 @@ const initialState = {
 export default function userReducer(state=initialState, action) {
     switch (action.type) {
       case UPDATE_USER:
-        return Object.assign({}, state, { user: action.payload.user });
+      return {
+        ...state,
+        user: action.payload,
+        isSignedIn: Object.keys(action.payload).length > 0 ? true : false,
+        }
+        // return Object.assign({}, state, { user: action.payload });
       case SIGN_IN: 
         return Object.assign({}, state, {isSignedIn: true});
       default:

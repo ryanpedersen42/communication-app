@@ -7,11 +7,9 @@ import {
 export function updateUser(newUser) {
   return {
     type: UPDATE_USER,
-    payload: {
-      user: newUser
+    payload: newUser
     }
   }
-}
 
 export function signIn(authStatus) {
   return {
