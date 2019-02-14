@@ -1,24 +1,53 @@
 import React, { Component } from 'react';
 import './Card.css';
+import { connect } from 'react-redux';
 
 //https://codesandbox.io/s/400lp1yjjw?from-embed this might help with opening box and close button
-class Card extends Component {
-  render() {
+class Card extends Component { 
+  constructor(props){
+    super(props);
+    this.state = {
+      username: this.props.user.user,
+    }
+    this.onFollow = this.onFollow.bind(this);
+  };
+
+
+  onFollow = (event) => {
+    fetch('http://localhost:3000/api/follow', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        username: this.state.username,
+        following: event,
+      })
+    })
+    .then((response) => response.json())
+    .then(response => {
+        console.log("heres the resp", response)
+      }).catch((err)=>{
+        console.log(err)
+      })
+  }
+
+render() {
+const { username, title, text, id } = this.props; 
   return( 
   <div className='pa4'>
-    <section class="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
-    <a class="f6 link dim ph3 pv2 dib right mb2 white bg-black absolute top-1 right-1" href="#0">X</a>
-    <h1 class="mt0">Here is one convo</h1>
-    <p class='lh-copy measure blue mb0'>
-    @username
+    <section className="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
+    <a className="f6 link dim ph3 pv2 dib right mb2 white bg-black absolute top-1 right-1" href="#0">X</a>
+    <h1 className="mt0">{title}</h1>
+    <p className='lh-copy measure blue mb0'>
+    {username}
     </p>
-    <p class="lh-copy measure mt1">
-      With the information down here.... who knows what it could all be about
+    <p className="lh-copy measure mt1">
+      {text}
     </p>
-    <form class="pa4 black-80">
-      <div class="measure flex">
+    <form className="pa4 black-80">
+      <div className="measure flex">
         <input id="name" class="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='reply' type="text" aria-describedby="name-desc" />
-        <a class="f6 link dim ph3 pv2 dib right mb2 white bg-black" href="#0">submit</a>    
+        <a className="f6 link dim ph3 pv2 dib right mb2 white bg-black" href="#0">submit</a>   
+        <button type="button" onClick={() => this.onFollow(id)}>Follow</button>
       </div>
     </form>  
   </section>
@@ -26,4 +55,11 @@ class Card extends Component {
   );
 }
 }
-export default Card;
+
+const mapStateToProps = state => {
+    return {
+      user: state.user,
+    }
+  }
+
+export default connect(mapStateToProps)(Card);

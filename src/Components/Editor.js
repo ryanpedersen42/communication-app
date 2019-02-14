@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
 class Editor extends Component {
@@ -41,7 +41,6 @@ class Editor extends Component {
         })
       this.setState({ postCompleted: true })
       }
-      //add a setstate up there ^^^^
   
   render() {
     if (this.state.postCompleted) {

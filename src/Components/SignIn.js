@@ -33,7 +33,7 @@ class SignIn extends Component {
       .then(user => {
         if (user.id) {
           this.props.onUpdateUser(user.username);
-          this.props.onSignIn();
+          // this.props.onSignIn();
         } 
     })
   }
