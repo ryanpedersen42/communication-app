@@ -50,12 +50,14 @@ class Editor extends Component {
     } 
     return(
       <div>
-      <section className="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative">
+      <section className="mw5 mw7-ns center bg-moon-gray pa3 ph3-ns relative top-2">
+      <div className="form-group">
       <input id="title" className="input-reset ba b--black-20 pa2 mb2 db w-100" onChange={this.onTitleChange} placeholder='title' type="text" aria-describedby="name-desc" />
-      <input id="text" onChange={this.onTextChange} className="input-reset ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
+      <textarea rows="3" id="text" onChange={this.onTextChange} className="input-reset form-control ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
+      </div>
       <form className="pa4 black-80">
-        <div className="measure flex">
-          <button onClick={this.submitPost} className="f6 link dim ph3 pv2 dib right mb2 white bg-black" type="submit">Submit</button>    
+        <div className="measure flex left-1 absolute">
+          <button onClick={this.submitPost} className="f6 link dim ph3 pv2 dib mb2 white bg-black" type="submit">Submit</button>    
         </div>
       </form>  
     </section>
