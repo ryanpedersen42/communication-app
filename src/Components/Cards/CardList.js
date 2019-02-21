@@ -22,15 +22,16 @@ class CardList extends Component {
       .then(response => response.json())      
       .then(text => this.setState({ posts: text}))
   }
-
   
   render() {
     const { posts } = this.state;
 
+    const sortedPosts = posts.sort((a, b) => (a.upvotes > b.upvotes) ? -1 : 1)
+
     return (
       <div>
       {
-        posts.map((post, i) => {
+        sortedPosts.map((post, i) => {
           return(
           <Card 
           key={i}
