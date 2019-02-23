@@ -12,7 +12,7 @@ class Replies extends Component {
     const { username, text } = this.props; 
 
       return ( 
-        <div className='border'>
+        <div className='bl'>
           <p>{username}: {text}</p>
         </div>
         

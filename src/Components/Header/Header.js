@@ -1,29 +1,42 @@
 import React, { Component } from 'react';
 import './Header.css';
 import logo from './logo.png';
-import { NavLink } from "react-router-dom";
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom';
+import signOut from './SignOut';
 
 class Header extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-  // onSignOut = () {
-
-  // }
   render() {
-  return (
-    <div>
-    <nav className="dt w-100 border-box pa4 ph5-ns bg-black">
-    <img src={logo} alt='logo' style={{ height: 50, width: 150 }} />
-    <div className="dtc v-mid w-75 tr helvetica">
-      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/" title="CardList">Home</NavLink>
-      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/editor" title="Editor">Write a post</NavLink>
-      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/about" title="About">About</NavLink>
-      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns white grow" to="/getinfo" title="Contact">Get Info</NavLink>
-      <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/signout" title="About">Sign Out</NavLink>
+    return (
+      <div>
+        <nav className="dt w-100 border-box pa4 ph5-ns bg-black">
+        <img src={logo} alt='logo' style={{ height: 50, width: 150 }} />
+        <div className="dtc v-mid w-75 tr helvetica">
+          <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/" title="CardList">Home</NavLink>
+          <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/editor" title="Editor">Write a post</NavLink>
+          <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/about" title="About">About</NavLink>
+          <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns white grow" to="/getinfo" title="Contact">Get Info</NavLink>
+          <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" onClick={this.props.onSignOut} to="/signout" title="About">Sign Out</NavLink>
+        </div>
+      </nav>
     </div>
-  </nav>
-  </div>
-  )
+    )
   }
 }
 
-export default Header; 
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    isSignedIn: state.user.isSignedIn
+  }
+}
+
+const mapActionsToProps = {
+  onSignOut: signOut,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Header); 

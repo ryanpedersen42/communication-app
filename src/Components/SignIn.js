@@ -89,4 +89,4 @@ const mapActionsToProps = {
   onUpdateUser: updateUser,
 };
 
-export default connect (mapStateToProps, mapActionsToProps)(SignIn);
+export default connect(mapStateToProps, mapActionsToProps)(SignIn);

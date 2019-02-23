@@ -91,7 +91,6 @@ class Card extends Component {
             </div>
           </section>
         </div>
-        
       );
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import 'tachyons';
 import { connect } from 'react-redux'
-// import Register from './Components/Register';
+import Register from './Components/Register';
 import SignIn from './Components/SignIn';
 import Header from './Components/Header/Header';
 import LogInHeader from './Components/Header/LogInHeader';
@@ -30,7 +30,12 @@ class App extends Component {
           <Route path="/reply" component={Reply} />
         </Switch>
       )
-        : <SignIn/> }
+        : 
+        <Switch>
+          <Route path="/signin" component={SignIn}/>
+          <Route path="/register" component={Register}/>
+        </Switch>
+         }
       </div>
     );
   }

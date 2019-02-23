@@ -22,7 +22,7 @@ class CardList extends Component {
         })
       })
       .then(response => response.json())      
-      .then(text => this.setState({ posts: text}))
+      .then(text => this.setState({ posts: text }))
   }
   
   render() {
