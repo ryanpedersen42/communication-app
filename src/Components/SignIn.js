@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser, signIn } from '../Redux/Actions/userActions';
+import { updateUser } from '../Redux/Actions/userActions';
 
 class SignIn extends Component {
   constructor(props) {
@@ -33,7 +33,6 @@ class SignIn extends Component {
       .then(user => {
         if (user.id) {
           this.props.onUpdateUser(user.username);
-          // this.props.onSignIn();
         } 
     })
   }
@@ -88,7 +87,6 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = {
   onUpdateUser: updateUser,
-  onSignIn: signIn
 };
 
 export default connect (mapStateToProps, mapActionsToProps)(SignIn);

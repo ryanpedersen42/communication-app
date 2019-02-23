@@ -2,22 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 import 'tachyons';
 import { connect } from 'react-redux'
-import Register from './Components/Register';
+// import Register from './Components/Register';
 import SignIn from './Components/SignIn';
 import Header from './Components/Header/Header';
-import Card from './Components/Cards/Card.js';
 import LogInHeader from './Components/Header/LogInHeader';
 import About from './Components/About.js';
 import Editor from './Components/Editor.js';
+import GetInfo from './Components/GetInfo.js';
+import Reply from './Components/Cards/Reply.js';
 import CardList from './Components/Cards/CardList.js'
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch } from 'react-router-dom';
 
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-      
+class App extends Component {      
   render() {
     const { isSignedIn } = this.props;
 
@@ -29,6 +25,9 @@ class App extends Component {
           <Route exact path="/" component={CardList} />
           <Route path="/about" component={About} />
           <Route path="/editor" component={Editor} />
+          <Route path="/getinfo" component={GetInfo} />
+          <Route path="/editor" component={Editor} />
+          <Route path="/reply" component={Reply} />
         </Switch>
       )
         : <SignIn/> }

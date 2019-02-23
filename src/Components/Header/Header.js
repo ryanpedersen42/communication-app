@@ -4,6 +4,10 @@ import logo from './logo.png';
 import { NavLink } from "react-router-dom";
 
 class Header extends Component {
+
+  // onSignOut = () {
+
+  // }
   render() {
   return (
     <div>

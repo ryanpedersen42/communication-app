@@ -1,45 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import Card from './Card'
+import Replies from './Replies.js'
 // import Reply from './Reply.js';
 
-class CardList extends Component {
+class ReplyList extends Component {
   constructor(props) {
     super(props)
     this.state = {
       posts: [],
       replies: [],
+      id: this.props.id,
       username: this.props.user.user,
     }
   }
 
   componentDidMount() {
-      fetch('http://localhost:3000/api/loadPosts', {
+      fetch('http://localhost:3000/api/loadReplies', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          username: this.state.username,
+          id: this.state.id,
         })
       })
       .then(response => response.json())      
-      .then(text => this.setState({ posts: text}))
+      .then(text => this.setState({ replies: text}))
   }
   
   render() {
-    const { posts } = this.state;
-    const sortedPosts = posts.sort((a, b) => (a.upvotes > b.upvotes) ? -1 : 1)
+    const { replies } = this.state;
 
     return (
       <div>
       {
-        sortedPosts.map((post, i) => {
+        replies.map((post, i) => {
           return(
-          <Card 
+          <Replies 
           key={i}
-          id={posts[i].id}
-          username={posts[i].username}
-          title={posts[i].title}
-          text={posts[i].text}
+          id={replies[i].id}
+          username={replies[i].username}
+          text={replies[i].text}
           />
           );
         })
@@ -55,4 +54,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(CardList);
+export default connect(mapStateToProps)(ReplyList);

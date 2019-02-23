@@ -1,6 +1,6 @@
 import {
   UPDATE_USER,
-  SIGN_IN
+  SIGN_OUT
 } from '../Constants/Constants'
 const initialState = {
   isSignedIn: false,
@@ -14,9 +14,8 @@ export default function userReducer(state=initialState, action) {
         user: action.payload,
         isSignedIn: Object.keys(action.payload).length > 0 ? true : false,
         }
-        // return Object.assign({}, state, { user: action.payload });
-      case SIGN_IN: 
-        return Object.assign({}, state, {isSignedIn: true});
+      case SIGN_OUT: 
+        return Object.assign({}, state, {isSignedIn: false, user: ''});
       default:
         return state;
     }

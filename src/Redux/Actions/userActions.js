@@ -1,7 +1,7 @@
 import {
   UPDATE_USER,
   SHOW_ERROR, 
-  SIGN_IN
+  SIGN_OUT
 } from '../Constants/Constants'
 
 export function updateUser(newUser) {
@@ -11,9 +11,9 @@ export function updateUser(newUser) {
     }
   }
 
-export function signIn(authStatus) {
+export function signOut(authStatus) {
   return {
-    type: SIGN_IN,
+    type: SIGN_OUT,
     payload: {
       status: authStatus
     }
