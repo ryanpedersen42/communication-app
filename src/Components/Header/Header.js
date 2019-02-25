@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
-import logo from './logo.png';
+// import logo from './logo.png';
+import altlogo from './altlogo.png';
 import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import signOut from './SignOut';
@@ -17,7 +18,7 @@ class Header extends Component {
     return (
       <div>
         <nav className="dt w-100 border-box pa4 ph5-ns bg-black">
-        <img src={logo} alt='logo' style={{ height: 70, width: 150 }} />
+        <img src={altlogo} alt='logo' style={{ height: 60, width: 150 }} />
         <div className="dtc v-mid w-75 tr helvetica">
           <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/" title="CardList">Home</NavLink>
           <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/editor" title="Editor">Write a post</NavLink>
