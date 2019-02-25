@@ -4,8 +4,8 @@ class GetInfo extends Component {
 
   render() {
     return (
-      <div>
-        Some stuff
+      <div className='tc pat-3 bold'>
+      Shoot 
       </div>
     )
   }

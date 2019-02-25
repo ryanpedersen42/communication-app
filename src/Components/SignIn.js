@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser } from '../Redux/Actions/userActions';
+import { Redirect } from 'react-router-dom';
 
 class SignIn extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      loggedIn: false
     }
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
@@ -32,17 +34,25 @@ class SignIn extends Component {
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          this.props.onUpdateUser(user.username);
+          this.props.onUpdateUser(user.username)
         } 
     })
+    .then(this.setState({ loggedIn: true }))
   }
 
   render() {
+
+    if (this.state.loggedIn) {
+      return (
+        <Redirect to="/" />
+      )
+    }
+
     return(
       <article className='br2 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center'>
       <main className="pa4 black-80">
         <div className="measure">
-          <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+          <fieldset id="register" className="ba b--transparent ph0 mh0">
             <legend className="f1 fw6 ph0 mh0">Sign In</legend>
             <div className="mt3">
               <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
