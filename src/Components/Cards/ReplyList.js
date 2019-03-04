@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Replies from './Replies.js'
-// import Reply from './Reply.js';
 
 class ReplyList extends Component {
   constructor(props) {
