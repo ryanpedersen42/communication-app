@@ -12,6 +12,7 @@ import GetInfo from './Components/GetInfo.js';
 import Reply from './Components/Cards/Reply.js';
 import CardList from './Components/Cards/CardList.js'
 import { Route, Switch } from 'react-router-dom';
+//test
 
 class App extends Component {      
   render() {
