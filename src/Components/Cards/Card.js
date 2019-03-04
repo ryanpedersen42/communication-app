@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Card.css';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-// import Reply from './Reply.js'
 
 //https://codesandbox.io/s/400lp1yjjw?from-embed this might help with opening box and close button
 class Card extends Component { 
