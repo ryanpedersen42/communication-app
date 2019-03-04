@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './Header.css';
-// import logo from './logo.png';
 import altlogo from './altlogo.png';
 import { connect } from 'react-redux'
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import signOut from './SignOut';
 
 class Header extends Component {
@@ -23,7 +22,6 @@ class Header extends Component {
           <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/" title="CardList">Home</NavLink>
           <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/editor" title="Editor">Write a post</NavLink>
           <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" to="/about" title="About">About</NavLink>
-          <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns white grow" to="/getinfo" title="Contact">Get Info</NavLink>
           <NavLink className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns grow white" onClick={this.props.onSignOut} to="/signin" title="About">Sign Out</NavLink>
         </div>
       </nav>

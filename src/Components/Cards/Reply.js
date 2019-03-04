@@ -13,6 +13,7 @@ class Reply extends Component {
       replyText: this.props.location.state.replyText,
       replies: {},
       ready: false,
+      replyCompleted: false,
       id: this.props.location.state.id,
     }
   }
@@ -38,14 +39,14 @@ class Reply extends Component {
     this.setState({ reply: event.target.value });
   }
 
-  onReply = (event) => {
+  onReply = () => {
     fetch('http://localhost:3000/api/reply', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         username: this.state.username,
         text: this.state.reply, 
-        id: event
+        id: this.state.id
       })
     })
       .then((response) => response.json())
@@ -54,7 +55,7 @@ class Reply extends Component {
         }).catch((err)=>{
           console.log(err)
         })
-      this.setState({ replyCompleted: true })
+      .then(this.setState({ replyCompleted: true }))
     }
 
   render() {
@@ -65,6 +66,7 @@ class Reply extends Component {
         <Redirect to="/" />
       )
     } 
+
     return (!ready) ?
       <h1>loading...</h1> :
      (
@@ -78,11 +80,11 @@ class Reply extends Component {
           id={id}
            />
           </div>
-            <textarea rows="3" id="text" onChange={this.onTextChange} className="input-reset form-control ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
+            <textarea rows="3" id="text" onChange={this.onReplyChange} className="input-reset form-control ba b--black-20 pa2 mb2 db w-100" placeholder='your message' type="text" aria-describedby="name-desc" />
           </div>
           <form className="pa4 black-80">
             <div className="measure flex left-1 absolute">
-              <button onClick={this.submitPost} className="f6 link dim ph3 pv2 dib mb2 white bg-black" type="submit">Submit</button>    
+              <button onClick={this.onReply} className="f6 link dim ph3 pv2 dib mb2 white bg-black" type="submit">Submit</button>    
             </div>
           </form>  
       </section>
